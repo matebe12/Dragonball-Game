@@ -183,13 +183,13 @@ function detectCollision() {
 
     // 충돌처리
     if ((fighter.x > asteroid.x && fighter.x < asteroid.x * aw
-        && fighter.y > asteroid.y && fighter.y < asteroid.y * ah)
-        || (fighter.x + fw > asteroid.x && fighter.x + fw < asteroid.x * aw
-            && fighter.y > asteroid.y && fighter.y < asteroid.y * ah)
-        || (fighter.x > asteroid.x && fighter.x < asteroid.x * aw
-            && fighter.y + fh > asteroid.y && fighter.y + fh < asteroid.y * ah)
-        || (fighter.x + fw > asteroid.x && fighter.x + fw < asteroid.x * aw
-            && fighter.y + fh > asteroid.y && fighter.y + fh < asteroid.y * ah)) { 
+        && fighter.y > asteroid.y && fighter.y < asteroid.y + ah)
+        || (fighter.x + fw > asteroid.x && fighter.x + fw < asteroid.x + aw
+            && fighter.y > asteroid.y && fighter.y < asteroid.y + ah)
+        || (fighter.x > asteroid.x && fighter.x < asteroid.x + aw
+            && fighter.y + fh > asteroid.y && fighter.y + fh < asteroid.y + ah)
+        || (fighter.x + fw > asteroid.x && fighter.x + fw < asteroid.x + aw
+            && fighter.y + fh > asteroid.y && fighter.y + fh < asteroid.y + ah)) { 
         bool_fighterexplosion = true;  
         bool_explode = true;
         bool_hitexplosion = true;
@@ -216,7 +216,7 @@ function detectCollision() {
     if (lasers.length) {
         for (var i = 0; i < lasers.length; i++) {
             if (lasers[i][0] > asteroid.x && lasers[i][0] < asteroid.x * aw
-                && lasers[i][1] > asteroid.y && lasers[i][1] < asteroid.y * ah) {
+                && lasers[i][1] > (asteroid.y +10) && lasers[i][1] < asteroid.y + (ah*3.5)) {
                 hitexplosion.x = lasers[i][0];
                 hitexplosion.y = lasers[i][1];
                 bool_hitexplosion = true;
@@ -350,7 +350,7 @@ addEventListener("keydown", function (e) {
     keysDown[e.keyCode] = true;
     
     if (e.keyCode === 32 && lasers.length <= laserTotal) {
-        lasers.push([fighter.x + 50, fighter.y + 10]);
+        lasers.push([fighter.x + 100, fighter.y + 10]);
         soundPlay();
     }
 }, false);
